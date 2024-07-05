@@ -11,7 +11,7 @@ const ForgetPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/user/forget-password", { email });
+      const response = await axios.post("https://zenclass-url-shortner-backend.onrender.com/api/user/forget-password", { email });
       if (response.data.status === 200) {
         toast.success(response.data.message);
         navigate("/login");

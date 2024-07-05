@@ -18,7 +18,7 @@ const ResetPassword = () => {
     }
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/user/reset-password/${id}/${token}`,
+        `https://zenclass-url-shortner-backend.onrender.com/api/user/reset-password/${id}/${token}`,
         { password }
       );
       toast.success("Password reset successfully");
