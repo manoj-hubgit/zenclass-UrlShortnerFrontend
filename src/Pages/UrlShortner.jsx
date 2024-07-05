@@ -9,7 +9,7 @@ const UrlShortner = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://zenclass-url-shortner-backend.onrender.com/api/url/shorten', { longUrl });
+      const response = await axios.post('https://shortner-backend-c4dw.onrender.com/api/url/shorten', { longUrl });
       setShortUrl(response.data.shortUrl);
     } catch (error) {
       console.error(error);

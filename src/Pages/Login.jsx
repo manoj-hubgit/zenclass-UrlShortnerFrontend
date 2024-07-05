@@ -11,7 +11,7 @@ const Login = ({setToken}) => {
     const payload={email,password}
     const handleSubmit= async (e)=>{
         e.preventDefault()
-        await axios.post('https://zenclass-url-shortner-backend.onrender.com/api/user/login-user',payload)
+        await axios.post('https://shortner-backend-c4dw.onrender.com/api/user/login-user',payload)
         .then((res)=>{toast.success(res.data.message);
             setToken(res.data.token);
             navigate("/urlshortner")

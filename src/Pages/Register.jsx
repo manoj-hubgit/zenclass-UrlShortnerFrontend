@@ -15,7 +15,7 @@ const Register = () => {
     const payload = { username, email, password };
     await axios
       .post(
-        "https://zenclass-url-shortner-backend.onrender.com/api/user/register-user",
+        "https://shortner-backend-c4dw.onrender.com/api/user/register-user",
         payload
       )
       .then((res) => {
