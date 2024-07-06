@@ -24,7 +24,6 @@ const Dashboard = () => {
     fetchStats();
   }, []);
 
-  
   return (
     <div className="container mt-5">
       <h2 className="text-center mb-4">Dashboard</h2>
