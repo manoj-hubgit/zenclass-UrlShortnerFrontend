@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 ChartJS.register(
   CategoryScale,
@@ -25,6 +25,8 @@ ChartJS.register(
 const Dashboard = () => {
   const [dailyStats, setDailyStats] = useState([]);
   const [monthlyStats, setMonthlyStats] = useState([]);
+  const dailyChartRef = useRef(null);
+  const monthlyChartRef = useRef(null);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -42,31 +44,45 @@ const Dashboard = () => {
     fetchStats();
   }, []);
 
-  const dailyData = {
-    labels: dailyStats.map((stat) => stat._id),
-    datasets: [
-      {
-        label: "URLs Created Per Day",
-        data: dailyStats.map((stat) => stat.count),
-        fill: false,
-        borderColor: "rgb(75, 192, 192)",
-        tension: 0.1,
-      },
-    ],
-  };
+  useEffect(() => {
+    if (dailyStats.length > 0) {
+      const ctx = dailyChartRef.current.getContext("2d");
+      new ChartJS(ctx, {
+        type: "line",
+        data: {
+          labels: dailyStats.map((stat) => stat._id),
+          datasets: [
+            {
+              label: "URLs Created Per Day",
+              data: dailyStats.map((stat) => stat.count),
+              borderColor: "rgb(75, 192, 192)",
+              tension: 0.1,
+            },
+          ],
+        },
+      });
+    }
+  }, [dailyStats]);
 
-  const monthlyData = {
-    labels: monthlyStats.map((stat) => stat._id),
-    datasets: [
-      {
-        label: "URLs Created Per Month",
-        data: monthlyStats.map((stat) => stat.count),
-        fill: false,
-        borderColor: "rgb(75, 192, 192)",
-        tension: 0.1,
-      },
-    ],
-  };
+  useEffect(() => {
+    if (monthlyStats.length > 0) {
+      const ctx = monthlyChartRef.current.getContext("2d");
+      new ChartJS(ctx, {
+        type: "line",
+        data: {
+          labels: monthlyStats.map((stat) => stat._id),
+          datasets: [
+            {
+              label: "URLs Created Per Month",
+              data: monthlyStats.map((stat) => stat.count),
+              borderColor: "rgb(75, 192, 192)",
+              tension: 0.1,
+            },
+          ],
+        },
+      });
+    }
+  }, [monthlyStats]);
 
   return (
     <div className="container mt-5">
@@ -76,7 +92,7 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h4 className="card-title">URLs Created Per Day</h4>
-              <Line data={dailyData} />
+              <canvas ref={dailyChartRef}></canvas>
             </div>
           </div>
         </div>
@@ -84,7 +100,7 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h4 className="card-title">URLs Created Per Month</h4>
-              <Line data={monthlyData} />
+              <canvas ref={monthlyChartRef}></canvas>
             </div>
           </div>
         </div>
