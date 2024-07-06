@@ -1,26 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import { Chart } from "chart.js";
 
 const Dashboard = () => {
   const [dailyStats, setDailyStats] = useState([]);
@@ -45,9 +25,9 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    if (dailyStats.length > 0) {
+    if (dailyStats.length > 0 && dailyChartRef.current) {
       const ctx = dailyChartRef.current.getContext("2d");
-      new ChartJS(ctx, {
+      new Chart(ctx, {
         type: "line",
         data: {
           labels: dailyStats.map((stat) => stat._id),
@@ -68,9 +48,9 @@ const Dashboard = () => {
   }, [dailyStats]);
 
   useEffect(() => {
-    if (monthlyStats.length > 0) {
+    if (monthlyStats.length > 0 && monthlyChartRef.current) {
       const ctx = monthlyChartRef.current.getContext("2d");
-      new ChartJS(ctx, {
+      new Chart(ctx, {
         type: "line",
         data: {
           labels: monthlyStats.map((stat) => stat._id),
