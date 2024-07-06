@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 
 const Dashboard = () => {
   const [dailyStats, setDailyStats] = useState([]);
