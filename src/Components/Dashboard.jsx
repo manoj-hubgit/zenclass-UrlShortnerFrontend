@@ -24,8 +24,7 @@ const Dashboard = () => {
     fetchStats();
   }, []);
 
-  // You can continue with your existing code to render the dashboard without charts
-
+  
   return (
     <div className="container mt-5">
       <h2 className="text-center mb-4">Dashboard</h2>
