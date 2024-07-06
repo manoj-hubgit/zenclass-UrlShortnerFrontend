@@ -9,7 +9,7 @@ import ForgetPassword from "./Pages/ForgetPassword";
 import ResetPassword from "./Pages/ResetPassword";
 import UrlShortner from "./Pages/UrlShortner";
 import PrivateRoute from "./Components/PrivateRoute";
-import Dashboard from "./Components/Dashboard";
+
 const App = () => {
   const [token, setToken] = useState("");
 
@@ -38,7 +38,6 @@ const App = () => {
             element={<ResetPassword />}
           />
         </Routes>
-        <Route path="/dashboard" element={<Dashboard/>}/>
       </BrowserRouter>
       <ToastContainer />
     </div>
