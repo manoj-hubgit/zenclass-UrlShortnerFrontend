@@ -1,8 +1,14 @@
-# React + Vite
+URL Shortener Frontend
+This repository contains the frontend implementation for a URL shortener application built with React. The application provides a user-friendly interface for shortening URLs, managing user accounts, and viewing statistics.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Project Overview
+The URL shortener frontend is built using React, designed to work seamlessly with the backend API (Node.js and MongoDB) provided in the repository. It allows users to:
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Authenticate: Register, login, and reset passwords securely.
+Shorten URLs: Quickly shorten long URLs to manageable short links.
+URL Management: Easily manage and delete created URLs.
+Technologies Used
+React: Frontend JavaScript library for building user interfaces.
+React Router: For handling navigation and routing within the application.
+Axios: Promise-based HTTP client for making API requests to the backend.
+Bootstrap: UI framework for responsive design and styling.
