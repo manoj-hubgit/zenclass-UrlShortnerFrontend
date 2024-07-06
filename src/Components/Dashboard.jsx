@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { Chart } from "chart.js";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Dashboard = () => {
   const [dailyStats, setDailyStats] = useState([]);
@@ -24,51 +24,7 @@ const Dashboard = () => {
     fetchStats();
   }, []);
 
-  useEffect(() => {
-    if (dailyStats.length > 0 && dailyChartRef.current) {
-      const ctx = dailyChartRef.current.getContext("2d");
-      new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: dailyStats.map((stat) => stat._id),
-          datasets: [
-            {
-              label: "URLs Created Per Day",
-              data: dailyStats.map((stat) => stat.count),
-              borderColor: "rgb(75, 192, 192)",
-              tension: 0.1,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-        },
-      });
-    }
-  }, [dailyStats]);
-
-  useEffect(() => {
-    if (monthlyStats.length > 0 && monthlyChartRef.current) {
-      const ctx = monthlyChartRef.current.getContext("2d");
-      new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: monthlyStats.map((stat) => stat._id),
-          datasets: [
-            {
-              label: "URLs Created Per Month",
-              data: monthlyStats.map((stat) => stat.count),
-              borderColor: "rgb(75, 192, 192)",
-              tension: 0.1,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-        },
-      });
-    }
-  }, [monthlyStats]);
+  // You can continue with your existing code to render the dashboard without charts
 
   return (
     <div className="container mt-5">
