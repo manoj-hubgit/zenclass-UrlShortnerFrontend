@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 ChartJS.register(
   CategoryScale,
@@ -59,6 +60,9 @@ const Dashboard = () => {
             },
           ],
         },
+        options: {
+          responsive: true,
+        },
       });
     }
   }, [dailyStats]);
@@ -78,6 +82,9 @@ const Dashboard = () => {
               tension: 0.1,
             },
           ],
+        },
+        options: {
+          responsive: true,
         },
       });
     }
