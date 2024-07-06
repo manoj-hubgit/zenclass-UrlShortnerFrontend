@@ -1,18 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import { Line } from "react-chartjs-2";
 
 const Dashboard = () => {
   const [dailyStats, setDailyStats] = useState([]);
   const [monthlyStats, setMonthlyStats] = useState([]);
-  const dailyChartRef = useRef(null);
-  const monthlyChartRef = useRef(null);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
         const response = await axios.get(
-          "https://shortner-backend-c4dw.onrender.com/api/url/stats"
+          "https://your-backend-url.com/api/url/stats"
         );
         setDailyStats(response.data.dailyStats);
         setMonthlyStats(response.data.monthlyStats);
@@ -24,6 +22,40 @@ const Dashboard = () => {
     fetchStats();
   }, []);
 
+  // Function to format dates for chart labels
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+  };
+
+  // Prepare data for daily stats chart
+  const dailyData = {
+    labels: dailyStats.map((stat) => formatDate(stat._id)),
+    datasets: [
+      {
+        label: "URLs Created Per Day",
+        data: dailyStats.map((stat) => stat.count),
+        fill: false,
+        borderColor: "rgb(75, 192, 192)",
+        tension: 0.1,
+      },
+    ],
+  };
+
+  // Prepare data for monthly stats chart
+  const monthlyData = {
+    labels: monthlyStats.map((stat) => stat._id),
+    datasets: [
+      {
+        label: "URLs Created Per Month",
+        data: monthlyStats.map((stat) => stat.count),
+        fill: false,
+        borderColor: "rgb(54, 162, 235)",
+        tension: 0.1,
+      },
+    ],
+  };
+
   return (
     <div className="container mt-5">
       <h2 className="text-center mb-4">Dashboard</h2>
@@ -32,7 +64,7 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h4 className="card-title">URLs Created Per Day</h4>
-              <canvas ref={dailyChartRef}></canvas>
+              <Line data={dailyData} />
             </div>
           </div>
         </div>
@@ -40,7 +72,7 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h4 className="card-title">URLs Created Per Month</h4>
-              <canvas ref={monthlyChartRef}></canvas>
+              <Line data={monthlyData} />
             </div>
           </div>
         </div>
