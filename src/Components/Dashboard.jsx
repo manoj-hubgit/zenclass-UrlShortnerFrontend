@@ -70,17 +70,23 @@ const Dashboard = () => {
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center">Dashboard</h2>
-      <div className="card mt-3">
-        <div className="card-body">
-          <h4 className="card-title">URLs Created Per Day</h4>
-          <Line data={dailyData} />
+      <h2 className="text-center mb-4">Dashboard</h2>
+      <div className="row">
+        <div className="col-lg-6 mb-4">
+          <div className="card">
+            <div className="card-body">
+              <h4 className="card-title">URLs Created Per Day</h4>
+              <Line data={dailyData} />
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="card mt-3">
-        <div className="card-body">
-          <h4 className="card-title">URLs Created Per Month</h4>
-          <Line data={monthlyData} />
+        <div className="col-lg-6 mb-4">
+          <div className="card">
+            <div className="card-body">
+              <h4 className="card-title">URLs Created Per Month</h4>
+              <Line data={monthlyData} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
